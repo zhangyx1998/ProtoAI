@@ -32,7 +32,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 # Dependencies
 find_package(NodeApiHeaders REQUIRED)
 find_package(NodeAddonApi REQUIRED)
-find_package(OpenCV REQUIRED)
 # header files and libraries
 include_directories(
   ${INC_DIR}      # project local include directory
