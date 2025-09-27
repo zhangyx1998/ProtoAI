@@ -1,11 +1,3 @@
-.vscode
-.cache
-node_modules
-core/build
-
-test.[cm]js
-*.test.[cm]js
-
 # Logs
 logs
 *.log

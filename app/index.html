@@ -2,11 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Application</title>
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src 'self' 'unsafe-inline';"
+        />
+        <title>Proto AI</title>
     </head>
-    <body>
-        <div id="root"></div>
-        <script src="renderer.js" type="module"></script>
+    <body oncontextmenu="return false;">
+        <div id="app" class="col-layout grid-view"></div>
+        <script type="module" src="/src/index.ts"></script>
     </body>
 </html>
