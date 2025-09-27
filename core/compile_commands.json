@@ -1,0 +1,26 @@
+[
+  {
+    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
+    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/addon.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/addon.cpp",
+    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/addon.cpp",
+    "output": "CMakeFiles/addon.dir/addon.cpp.o"
+  },
+  {
+    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
+    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/Dispatcher.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Dispatcher.cpp",
+    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Dispatcher.cpp",
+    "output": "CMakeFiles/addon.dir/src/Dispatcher.cpp.o"
+  },
+  {
+    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
+    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/ExampleObject.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/ExampleObject.cpp",
+    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/ExampleObject.cpp",
+    "output": "CMakeFiles/addon.dir/src/ExampleObject.cpp.o"
+  },
+  {
+    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
+    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/Initializer.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Initializer.cpp",
+    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Initializer.cpp",
+    "output": "CMakeFiles/addon.dir/src/Initializer.cpp.o"
+  }
+]

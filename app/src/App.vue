@@ -1,9 +1,32 @@
-<script setup lang="ts">
+<script lang="ts">
+
 import HorizontalDivision from './layout/HorizontalDivision.vue';
 import Menubar from './components/MenuBar.vue';
 import FootBar from './components/FootBar.vue';
 import HistoryView from './components/HistoryView.vue';
 import UserDialog from './components/UserDialog.vue';
+import { getPlaceholderData } from './helpers/createPlaceholderData';
+import type { Packet, UserHint } from "core";
+
+interface dataInterface {
+  packetData: (Packet | UserHint)[];
+}
+
+export default {
+  components: {
+    HorizontalDivision,
+    Menubar,
+    FootBar,
+    HistoryView,
+    UserDialog
+  },
+  data(): dataInterface {
+    return {
+      packetData: getPlaceholderData()
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -12,7 +35,7 @@ import UserDialog from './components/UserDialog.vue';
   <HorizontalDivision :min-width-left="320" :min-width-right="320" class="main-layout">
     <template #left>
       <div class="data-panel">
-        <HistoryView style="flex-grow: 1" />
+        <HistoryView style="flex-grow: 1" :packets="packetData"/>
         <UserDialog style="height: 3em; border: 1px solid gray" />
       </div>
     </template>

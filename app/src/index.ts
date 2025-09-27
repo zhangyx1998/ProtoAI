@@ -7,4 +7,4 @@ function preventZoom(e: WheelEvent) {
     if (e.metaKey || e.ctrlKey) e.preventDefault();
 }
 document.addEventListener("wheel", preventZoom, { passive: false });
-console.clear();
+// console.clear();
