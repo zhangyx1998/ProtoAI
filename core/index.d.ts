@@ -22,17 +22,21 @@ type UserHint = {
 };
 
 type InferredPacketProperties = {
-    readonly protocol_name: string;
+    readonly title: string; // A concise name for the packet type
     readonly description: string; // Describes the packet's role or purpose within the protocol
     readonly confidence: number; // Confidence level of the inference (0 to 1)
     readonly fields: BinaryField[];
 };
 
 type BinaryField = {
-    readonly name: string; // Name of the field
-    readonly description: string; // Description of the field's purpose
-    readonly start_bit: number; // Start position of the field in bits
-    readonly length: number; // Length of the field in bits
+    // Name of the field
+    readonly name: string;
+    // Description of the field's purpose
+    readonly description: string;
+    // Start and end position of the field in bits
+    // Adjacent fields must not overlap, but they may or may not
+    //  be contiguous
+    readonly range: [number, number];
 };
 
 declare module "core" {
@@ -49,6 +53,7 @@ declare module "core" {
     }
 
     export class Counter extends CoreObject {
+        static create(): Counter;
         [Symbol.iterator](): Iterator<number>;
         get value(): number;
     }
