@@ -6,7 +6,7 @@
 
 type Awaitable<T> = T | Promise<T>;
 
-type Packet = {
+export type Packet = {
     // Raw packet info
     type: "DATA-UP" | "DATA-DOWN";
     timestamp: BigInt;
@@ -15,20 +15,20 @@ type Packet = {
     inferred?: InferredPacketProperties;
 };
 
-type UserHint = {
+export type UserHint = {
     type: "USER-HINT";
     timestamp: BigInt;
     payload: string;
 };
 
-type InferredPacketProperties = {
+export type InferredPacketProperties = {
     readonly title: string; // A concise name for the packet type
     readonly description: string; // Describes the packet's role or purpose within the protocol
     readonly confidence: number; // Confidence level of the inference (0 to 1)
     readonly fields: BinaryField[];
 };
 
-type BinaryField = {
+export type BinaryField = {
     // Name of the field
     readonly name: string;
     // Description of the field's purpose
