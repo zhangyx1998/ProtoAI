@@ -79,7 +79,11 @@ export type InferredPacketType = {
 - DATA-UP packets represent data sent from a device back to the controller/host
 - USER-HINT entries provide contextual information about system state at specific timestamps, be aware that the user input is slower than the data packets because of human reaction time
 - All payload data is represented in hexadecimal format
-- Timestamps are in some unit of time`;
+- Timestamps are in some unit of time
+
+### MOST IMPORTANT NOTE:
+- Please ensure the response is valid JSON that can be parsed directly without any additional text or formatting.
+- Please strictly follow the provided response structure without adding or omitting any fields.`;
 
     return prompt;
 }
@@ -117,15 +121,14 @@ export async function runGPTInference(combinedData) {
         const response = await client.responses.create({
             model: "gpt-5",
             input: promptContent,
+            // reasoning: { effort: "low" },
         });
 
         const content = response.output_text;
 
         // Process the inferences using dataHandling.js function
         console.log("🔄 Processing inferences...");
-
         const result = await processInferences(content, combinedData);
-
         return result;
     } catch (error) {
         alert(
