@@ -22,7 +22,7 @@ function filter(ports: PortInfo[]) {
     return ports.filter(
         (port) =>
             port.manufacturer !== "ProtoAI" &&
-            port.path !== downStream.value?.info.path
+            port.path !== upStream.value?.info.path
     );
 }
 function display({ path, vendorId, productId, manufacturer }: PortInfo) {
