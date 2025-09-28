@@ -15,7 +15,7 @@ import {
     enumeratePorts,
     queue
 } from "@lib/serial";
-import { store } from "@src/store";
+import { loading, store, summary } from "@src/store";
 import { runGPTInference } from "@src/GPT.js";
 const downStreamPort = ref<PortInfo | null>(null);
 function filter(ports: PortInfo[]) {
@@ -46,7 +46,11 @@ async function stopCapture() {
     queue.value = null;
     console.log("Captured packets:", captured);
     store.value.push(...(captured ?? []));
+    summary.value = null;
+    loading.value = true;
     const chatData = await runGPTInference(store.value);
+    summary.value = chatData.summary;
+    loading.value = false;
     store.value = chatData.details;
 }
 </script>

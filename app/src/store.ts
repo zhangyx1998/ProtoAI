@@ -3,6 +3,11 @@ import type { Packet, UserHint } from "core";
 
 export const store = ref<(Packet | UserHint)[]>([]);
 
+export const loading = ref(false);
+export const summary = ref<object | null>(null);
+
+
+
 // export const combinedData: Array<Packet | UserHint> = [
 //     {
 //         type: "DATA-DOWN",
