@@ -1,0 +1,488 @@
+{
+  "summary": {
+    "title": "MSP-like Flight Controller Protocol",
+    "overview": "A framed binary protocol using the ASCII header '$','M' plus a direction character ('<' for controller→device, '>' for device→controller). Frames contain: payload length (1 byte), command ID (1 byte), variable-length data, and a 1-byte XOR checksum of [length, command, data].",
+    "entries": [
+      {
+        "title": "Info Request",
+        "description": "Host requests device information (cmd 0x01) with no payload.",
+        "fields": [
+          {
+            "name": "Header ('$','M',dir)",
+            "description": "Protocol magic plus direction",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length",
+            "description": "Number of data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID",
+            "description": "Command selector (0x01)",
+            "range": [
+              32,
+              39
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Info Response",
+        "description": "Device responds to cmd 0x01 with 3 bytes of device info (model/version/flags; exact mapping uncertain).",
+        "fields": [
+          {
+            "name": "Header ('$','M',dir)",
+            "description": "Protocol magic plus direction",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length",
+            "description": "Number of data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID",
+            "description": "Echoed command selector (0x01)",
+            "range": [
+              32,
+              39
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Tag Request",
+        "description": "Host requests a 4-byte firmware tag/string (cmd 0x04) with no payload.",
+        "fields": [
+          {
+            "name": "Header ('$','M',dir)",
+            "description": "Protocol magic plus direction",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length",
+            "description": "Number of data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID",
+            "description": "Command selector (0x04)",
+            "range": [
+              32,
+              39
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Tag Response",
+        "description": "Device returns a 4-byte ASCII firmware tag in response to cmd 0x04.",
+        "fields": [
+          {
+            "name": "Header ('$','M',dir)",
+            "description": "Protocol magic plus direction",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length",
+            "description": "Number of data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID",
+            "description": "Echoed command selector (0x04)",
+            "range": [
+              32,
+              39
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Set Motion Command",
+        "description": "Host sets motion/mode via 1-byte value (cmd 0x4D). Value 0x02 aligns with 'forward' per user hint.",
+        "fields": [
+          {
+            "name": "Header ('$','M',dir)",
+            "description": "Protocol magic plus direction",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length",
+            "description": "Number of data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID",
+            "description": "Command selector (0x4D)",
+            "range": [
+              32,
+              39
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "details": [
+    {
+      "type": "DATA-DOWN",
+      "timestamp": "10",
+      "payload": {
+        "type": "ArrayBuffer",
+        "data": [
+          36,
+          77,
+          60,
+          0,
+          1,
+          1
+        ]
+      },
+      "inferred": {
+        "title": "Info Request",
+        "description": "Host→Device request for device info (cmd 0x01), zero-length payload; checksum matches XOR(length, cmd).",
+        "confidence": 0.9,
+        "fields": [
+          {
+            "name": "Header ('$','M','<')",
+            "description": "Magic + direction (controller to device)",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length = 0x00",
+            "description": "No data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID = 0x01",
+            "description": "Info query",
+            "range": [
+              32,
+              39
+            ]
+          },
+          {
+            "name": "Checksum = 0x01",
+            "description": "XOR of [Length, Command, Data]",
+            "range": [
+              40,
+              47
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "DATA-UP",
+      "timestamp": "20",
+      "payload": {
+        "type": "ArrayBuffer",
+        "data": [
+          36,
+          77,
+          62,
+          3,
+          1,
+          0,
+          1,
+          45,
+          46
+        ]
+      },
+      "inferred": {
+        "title": "Info Response",
+        "description": "Device→Host response to cmd 0x01 with 3 info bytes (00 01 2D); checksum valid.",
+        "confidence": 0.85,
+        "fields": [
+          {
+            "name": "Header ('$','M','>')",
+            "description": "Magic + direction (device to controller)",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length = 0x03",
+            "description": "Three data bytes follow",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID = 0x01",
+            "description": "Echoed Info command",
+            "range": [
+              32,
+              39
+            ]
+          },
+          {
+            "name": "DeviceInfo[0] = 0x00",
+            "description": "Info/flags/version byte 0 (meaning uncertain)",
+            "range": [
+              40,
+              47
+            ]
+          },
+          {
+            "name": "DeviceInfo[1] = 0x01",
+            "description": "Info/version byte 1 (meaning uncertain)",
+            "range": [
+              48,
+              55
+            ]
+          },
+          {
+            "name": "DeviceInfo[2] = 0x2D",
+            "description": "Info/version byte 2 (meaning uncertain)",
+            "range": [
+              56,
+              63
+            ]
+          },
+          {
+            "name": "Checksum = 0x2E",
+            "description": "XOR of [03,01,00,01,2D]",
+            "range": [
+              64,
+              71
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "DATA-DOWN",
+      "timestamp": "30",
+      "payload": {
+        "type": "ArrayBuffer",
+        "data": [
+          36,
+          77,
+          60,
+          0,
+          4,
+          4
+        ]
+      },
+      "inferred": {
+        "title": "Tag Request",
+        "description": "Host→Device request for 4-byte firmware tag (cmd 0x04), zero payload; checksum valid.",
+        "confidence": 0.95,
+        "fields": [
+          {
+            "name": "Header ('$','M','<')",
+            "description": "Magic + direction (controller to device)",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length = 0x00",
+            "description": "No data bytes",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID = 0x04",
+            "description": "Firmware tag query",
+            "range": [
+              32,
+              39
+            ]
+          },
+          {
+            "name": "Checksum = 0x04",
+            "description": "XOR of [00,04]",
+            "range": [
+              40,
+              47
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "DATA-UP",
+      "timestamp": "40",
+      "payload": {
+        "type": "ArrayBuffer",
+        "data": [
+          36,
+          77,
+          62,
+          4,
+          4,
+          66,
+          69,
+          84,
+          65,
+          18
+        ]
+      },
+      "inferred": {
+        "title": "Tag Response",
+        "description": "Device→Host response to cmd 0x04 with ASCII tag 'BETA' (0x42 0x45 0x54 0x41); checksum valid.",
+        "confidence": 0.95,
+        "fields": [
+          {
+            "name": "Header ('$','M','>')",
+            "description": "Magic + direction (device to controller)",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length = 0x04",
+            "description": "Four data bytes follow",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID = 0x04",
+            "description": "Echoed tag command",
+            "range": [
+              32,
+              39
+            ]
+          },
+          {
+            "name": "FirmwareTag 'BETA'",
+            "description": "ASCII bytes 42 45 54 41",
+            "range": [
+              40,
+              71
+            ]
+          },
+          {
+            "name": "Checksum = 0x12",
+            "description": "XOR of [04,04,42,45,54,41]",
+            "range": [
+              72,
+              79
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "USER-HINT",
+      "timestamp": "50",
+      "payload": "the flight controller is initiated"
+    },
+    {
+      "type": "DATA-DOWN",
+      "timestamp": "60",
+      "payload": {
+        "type": "ArrayBuffer",
+        "data": [
+          36,
+          77,
+          60,
+          1,
+          77,
+          2,
+          78
+        ]
+      },
+      "inferred": {
+        "title": "Set Motion Command",
+        "description": "Host→Device motion/mode set (cmd 0x4D) with value 0x02; aligns with subsequent hint of forward motion.",
+        "confidence": 0.7,
+        "fields": [
+          {
+            "name": "Header ('$','M','<')",
+            "description": "Magic + direction (controller to device)",
+            "range": [
+              0,
+              23
+            ]
+          },
+          {
+            "name": "Length = 0x01",
+            "description": "One data byte follows",
+            "range": [
+              24,
+              31
+            ]
+          },
+          {
+            "name": "Command ID = 0x4D",
+            "description": "Set motion/mode",
+            "range": [
+              32,
+              39
+            ]
+          },
+          {
+            "name": "MotionCode = 0x02",
+            "description": "Likely 'forward' action",
+            "range": [
+              40,
+              47
+            ]
+          },
+          {
+            "name": "Checksum = 0x4E",
+            "description": "XOR of [01,4D,02]",
+            "range": [
+              48,
+              55
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "USER-HINT",
+      "timestamp": "70",
+      "payload": "the robot is moving forward right now"
+    }
+  ]
+}
