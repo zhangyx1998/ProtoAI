@@ -7,46 +7,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Function to read and parse data.ts file
-function readDataFromFile() {
-    const dataFilePath = path.join(__dirname, 'data.ts');
-    const dataContent = fs.readFileSync(dataFilePath, 'utf8');
-    
-    // Extract the combinedData array from the file
-    const combinedDataMatch = dataContent.match(/const combinedData[\s\S]*?= \[([\s\S]*?)\];/);
-    if (!combinedDataMatch) {
-        throw new Error('Could not find combinedData array in data.ts');
-    }
-    
-    // Parse the array content (simplified parsing for this specific format)
-    const arrayContent = combinedDataMatch[1];
-    const entries = [];
-    
-    // Split by object boundaries and parse each entry
-    const objectMatches = arrayContent.match(/\{[\s\S]*?\}/g) || [];
-    
-    objectMatches.forEach((objStr, index) => {
-        const entry = {};
-        
-        // Extract type
-        const typeMatch = objStr.match(/type:\s*"([^"]+)"/);
-        if (typeMatch) entry.type = typeMatch[1];
-        
-        // Extract timestamp
-        const timestampMatch = objStr.match(/timestamp:\s*(\d+)n/);
-        if (timestampMatch) entry.timestamp = timestampMatch[1];
-        
-        // Extract payload
-        const payloadMatch = objStr.match(/payload:\s*(?:hexStringToArrayBuffer\("([^"]+)"\)|"([^"]+)")/);
-        if (payloadMatch) {
-            entry.payload = payloadMatch[1] || payloadMatch[2]; // hex string or regular string
-        }
-        
-        entries.push(entry);
-    });
-    
-    return entries;
-}
+// GPT_infer.js - Pure inference module
+// This module only handles GPT inference processing
+// Data reading should be handled by the calling module
 
 // Function to generate prompt text
 function generatePrompt(data) {
@@ -135,11 +98,14 @@ function writePromptToFile(promptContent) {
 }
 
 // Main inference function (exported for use in other modules)
-export async function runGPTInference() {
+export async function runGPTInference(combinedData) {
     try {
-        // Read data from data.ts
-        console.log('Reading data from data.ts...');
-        const combinedData = readDataFromFile();
+        // Validate input parameter
+        if (!combinedData || !Array.isArray(combinedData)) {
+            throw new Error('combinedData parameter is required and must be an array');
+        }
+        
+        console.log(`Processing ${combinedData.length} entries...`);
         
         // Generate prompt
         console.log('Generating prompt...');
@@ -176,7 +142,5 @@ export async function runGPTInference() {
     }
 }
 
-// If running this file directly, execute the function
-if (import.meta.url === `file://${process.argv[1]}`) {
-    runGPTInference();
-}
+// This module only exports the runGPTInference function
+// Use it by importing and calling with combinedData parameter
