@@ -8,3 +8,5 @@ function preventZoom(e: WheelEvent) {
 }
 document.addEventListener("wheel", preventZoom, { passive: false });
 // console.clear();
+
+import "@lib/serial";

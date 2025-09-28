@@ -9,15 +9,15 @@ type Awaitable<T> = T | Promise<T>;
 export type Packet = {
     // Raw packet info
     type: "DATA-UP" | "DATA-DOWN";
-    timestamp: BigInt;
-    payload: ArrayBuffer;
+    timestamp: number;
+    payload: Uint8Array;
     // AI Inferred Properties
     inferred?: InferredPacketProperties;
 };
 
 export type UserHint = {
     type: "USER-HINT";
-    timestamp: BigInt;
+    timestamp: number;
     payload: string;
 };
 

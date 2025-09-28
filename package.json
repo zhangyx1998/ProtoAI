@@ -19,5 +19,8 @@
     },
     "scripts": {
         "app": "cd app && npx vite"
+    },
+    "dependencies": {
+        "serialport": "^13.0.0"
     }
 }

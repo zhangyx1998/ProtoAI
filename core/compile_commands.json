@@ -1,26 +1,50 @@
 [
   {
-    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
-    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/addon.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/addon.cpp",
-    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/addon.cpp",
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/node-23.11.0-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/node-arm64/v23.11.0/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/addon.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/addon.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/addon.cpp",
     "output": "CMakeFiles/addon.dir/addon.cpp.o"
   },
   {
-    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
-    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/Dispatcher.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Dispatcher.cpp",
-    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Dispatcher.cpp",
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/node-23.11.0-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/node-arm64/v23.11.0/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/Dispatcher.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/Dispatcher.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/Dispatcher.cpp",
     "output": "CMakeFiles/addon.dir/src/Dispatcher.cpp.o"
   },
   {
-    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
-    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/ExampleObject.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/ExampleObject.cpp",
-    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/ExampleObject.cpp",
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/node-23.11.0-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/node-arm64/v23.11.0/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/ExampleObject.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/ExampleObject.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/ExampleObject.cpp",
     "output": "CMakeFiles/addon.dir/src/ExampleObject.cpp.o"
   },
   {
-    "directory": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/build/node-24.6.0-x64",
-    "command": "/usr/bin/c++ -Daddon_EXPORTS -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/lib -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/assets -I/home/briyoda/.cmake-js/node-x64/v24.6.0/include/node -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/node_modules/node-api-headers/include -I/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/../node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -fPIC -o CMakeFiles/addon.dir/src/Initializer.cpp.o -c /home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Initializer.cpp",
-    "file": "/home/briyoda/Projects/Vue/HardwareAnalyzer/ProtoAI/core/src/Initializer.cpp",
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/node-23.11.0-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/node-arm64/v23.11.0/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/Initializer.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/Initializer.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/Initializer.cpp",
+    "output": "CMakeFiles/addon.dir/src/Initializer.cpp.o"
+  },
+  {
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/electron-38.1.2-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DV8_MEMORY_CAGE -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/electron-arm64/v38.1.2/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/addon.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/addon.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/addon.cpp",
+    "output": "CMakeFiles/addon.dir/addon.cpp.o"
+  },
+  {
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/electron-38.1.2-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DV8_MEMORY_CAGE -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/electron-arm64/v38.1.2/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/Dispatcher.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/Dispatcher.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/Dispatcher.cpp",
+    "output": "CMakeFiles/addon.dir/src/Dispatcher.cpp.o"
+  },
+  {
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/electron-38.1.2-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DV8_MEMORY_CAGE -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/electron-arm64/v38.1.2/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/ExampleObject.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/ExampleObject.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/ExampleObject.cpp",
+    "output": "CMakeFiles/addon.dir/src/ExampleObject.cpp.o"
+  },
+  {
+    "directory": "/Users/yuxuan/Lab/ProtoAI/core/build/electron-38.1.2-arm64",
+    "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DV8_MEMORY_CAGE -Daddon_EXPORTS -I/Users/yuxuan/Lab/ProtoAI/core/include -I/Users/yuxuan/Lab/ProtoAI/core/lib -I/Users/yuxuan/Lab/ProtoAI/core/assets -I/Users/yuxuan/.cmake-js/electron-arm64/v38.1.2/include/node -I/Users/yuxuan/Lab/ProtoAI/node_modules/node-api-headers/include -I/Users/yuxuan/Lab/ProtoAI/core/../node_modules/node-addon-api -D_DARWIN_USE_64_BIT_INODE=1 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DBUILDING_NODE_EXTENSION -g -DDEBUG -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -fPIC -o CMakeFiles/addon.dir/src/Initializer.cpp.o -c /Users/yuxuan/Lab/ProtoAI/core/src/Initializer.cpp",
+    "file": "/Users/yuxuan/Lab/ProtoAI/core/src/Initializer.cpp",
     "output": "CMakeFiles/addon.dir/src/Initializer.cpp.o"
   }
 ]
