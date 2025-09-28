@@ -134,39 +134,49 @@ function writePromptToFile(promptContent) {
     console.log('Generated prompt.txt successfully');
 }
 
-// Main execution
-try {
-    // Read data from data.ts
-    console.log('Reading data from data.ts...');
-    const combinedData = readDataFromFile();
-    
-    // Generate prompt
-    console.log('Generating prompt...');
-    const promptContent = generatePrompt(combinedData);
-    
-    // Write to prompt.txt
-    writePromptToFile(promptContent);
-    
-    // Initialize OpenAI client
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// Main inference function (exported for use in other modules)
+export async function runGPTInference() {
+    try {
+        // Read data from data.ts
+        console.log('Reading data from data.ts...');
+        const combinedData = readDataFromFile();
+        
+        // Generate prompt
+        console.log('Generating prompt...');
+        const promptContent = generatePrompt(combinedData);
+        
+        // Write to prompt.txt
+        writePromptToFile(promptContent);
+        
+        // Initialize OpenAI client
+        const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-    // Send prompt to GPT and get response
-    console.log('🤖 Sending prompt to GPT...');
-    const response = await client.responses.create({
-        model: "gpt-5",
-        input: promptContent
-    });
-    
-    // Save GPT response to file
-    const gptOutputFile = path.join(__dirname, 'GPT_output.txt');
-    fs.writeFileSync(gptOutputFile, response.output_text, 'utf8');
-    console.log('💾 GPT response saved to GPT_output.txt');
-    
-    // Process the inferences using dataHandling.js function
-    console.log('🔄 Processing inferences...');
-    const { processInferences } = await import('./dataHandling.js');
-    await processInferences(gptOutputFile);
+        // Send prompt to GPT and get response
+        console.log('🤖 Sending prompt to GPT...');
+        const response = await client.responses.create({
+            model: "gpt-5",
+            input: promptContent
+        });
+        
+        // Save GPT response to file
+        const gptOutputFile = path.join(__dirname, 'GPT_output.txt');
+        fs.writeFileSync(gptOutputFile, response.output_text, 'utf8');
+        console.log('💾 GPT response saved to GPT_output.txt');
+        
+        // Process the inferences using dataHandling.js function
+        console.log('🔄 Processing inferences...');
+        const { processInferences } = await import('./dataHandling.js');
+        const result = await processInferences(gptOutputFile);
+        
+        return result;
 
-} catch (error) {
-    console.error('Error:', error.message);
+    } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+    }
+}
+
+// If running this file directly, execute the function
+if (import.meta.url === `file://${process.argv[1]}`) {
+    runGPTInference();
 }
