@@ -5,7 +5,9 @@ import Menubar from './components/MenuBar.vue';
 import FootBar from './components/FootBar.vue';
 import HistoryView from './components/HistoryView.vue';
 import UserDialog from './components/UserDialog.vue';
-import { getPlaceholderData } from './helpers/createPlaceholderData';
+import { convertPayloads } from './helpers/createPlaceholderData';
+import packetJson from '../../data/processed_data.json'
+import { combinedData } from '../../data/data'
 import type { Packet, UserHint } from "core";
 
 interface dataInterface {
@@ -18,11 +20,22 @@ export default {
     Menubar,
     FootBar,
     HistoryView,
-    UserDialog
+    UserDialog,
+  },
+  computed: {
+    startTime() {
+      console.log(`startTime: ${Math.min(...this.packetData.map(e => Number(e.timestamp)))}`)
+      return Math.min(...this.packetData.map(e => Number(e.timestamp)))
+    }
   },
   data(): dataInterface {
     return {
-      packetData: getPlaceholderData()
+      packetData: combinedData
+    }
+  },
+  methods: {
+    appendPacket(packet: (Packet | UserHint)) {
+      this.packetData.push(packet)
     }
   }
 }
@@ -31,17 +44,16 @@ export default {
 
 <template>
   <Menubar />
-  <FootBar />
+  <FootBar style="z-index: -1"/>
   <HorizontalDivision :min-width-left="320" :min-width-right="320" class="main-layout">
     <template #left>
       <div class="data-panel">
-        <HistoryView style="flex-grow: 1" :packets="packetData"/>
-        <UserDialog style="height: 3em; border: 1px solid gray" />
+        <HistoryView style="height: calc(100% - 3em)" :packets="packetData" :startTime="startTime"/>
+        <UserDialog style="height: 3em" :sendPacket="appendPacket" :startTime="startTime"/>
       </div>
     </template>
     <template #right>
-      <div class="inference-panel" placeholder="AI Inference">
-      </div>
+      
     </template>
   </HorizontalDivision>
 </template>

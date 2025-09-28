@@ -1,9 +1,52 @@
-<script>
+<script lang="ts">
+import type { Packet, UserHint } from "core";
 
 export default {
+  props: {
+    sendPacket: {
+      type: Function,
+      required: true
+    },
+    startTime: {
+      type: Number,
+      required: true
+    }
+  },
   data() {
     return {
-      inputText: ""
+      inputText: "",
+      creationTime: 0
+    }
+  },
+  created() {
+    this.creationTime = Date.now();
+  },
+  computed: {
+    validInput() {
+      if (this.inputText === "") {
+        return false
+      }
+
+      return true;
+    },
+    elapsedTime() {
+      return this.creationTime - Date.now();
+    }
+  },
+  methods: {
+    submitMessage() {
+      if (!this.validInput) {
+        return
+      }
+
+      const packet: UserHint = {
+        type: "USER-HINT",
+        timestamp: BigInt(this.elapsedTime),
+        payload: this.inputText
+      }
+
+      this.sendPacket(packet);
+      this.inputText = ""
     }
   }
 }
@@ -11,9 +54,14 @@ export default {
 </script>
 
 <template>
-  <form class="user-dialog-container">
-    <input v-model="inputText"/>
-    <button>Send</button>
+  <form @submit.prevent="submitMessage" class="user-dialog-container">
+    <input class="input-box"  v-model="inputText"/>
+    <button
+      type="submit"
+      :class="{ valid: validInput }"
+    >
+      Send
+    </button>
   </form>
 </template>
 
@@ -22,17 +70,43 @@ export default {
 .user-dialog-container {
   display: flex;
   flex-direction: row;
+  border: 1px solid gray;
+  transition: border-color 0.5s;
+
+  z-index: 255;
 }
 
-input {
-  height: 100%;
-  padding: 10px;
+.user-dialog-container:focus, 
+.user-dialog-container:focus-within {
+  display: flex;
+  flex-direction: row;
+  border-color: #3a62a9;
+}
+
+.input-box {
+  margin: 5px;
+  padding: 5px;
   flex-grow: 1;
+  /* border-radius: 10px;
+  border: rgb(56, 56, 56) solid 1px;
+  transition: border-color 0.3s; */
+}
+
+.input-box:focus {
+  border-color: gray;
 }
 
 button {
   margin: 5px;
   padding: 10px;
+  transition: background-color 0.5s;
+  transform: outline 0.5s;
+}
+
+button.valid {
+  background-color: #3a62a9;
+  border-color: white;
+  border-radius: 3px;
 }
 
 </style>

@@ -1,6 +1,6 @@
 import type { Packet, UserHint } from "core";
 
-const combinedData: Array<Packet | UserHint> = [
+export const combinedData: Array<Packet | UserHint> = [
     {
     type: "DATA-DOWN",
     timestamp: 10n,

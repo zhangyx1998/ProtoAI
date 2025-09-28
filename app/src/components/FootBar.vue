@@ -7,3 +7,4 @@ You may find the full license in project root directory.
 <template>
     <div class="foot-bar">FOOT BAR</div>
 </template>
+

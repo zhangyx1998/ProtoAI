@@ -10,6 +10,26 @@ function hexToArrayBuffer(hexArray: string[]): ArrayBuffer {
   return buffer;
 }
 
+export function convertPayloads(data: any[]): (Packet | UserHint)[] {
+  return data.map(item => {
+    if (item.type.startsWith("DATA")) {
+      const inferredData = !!item.inferred ? item.inferred : null
+      return {
+        ...item,
+        timestamp: BigInt(item.timestamp.replace(/n$/, '')),
+        payload: new Uint8Array(item.payload.data).buffer, // convert array to ArrayBuffer
+        inferred: inferredData
+      } as Packet;
+    } else {
+      return {
+        ...item,
+        timestamp: BigInt(item.timestamp.replace(/n$/, '')),
+        payload: item.payload,
+      }
+    }
+  });
+}
+
 export function getPlaceholderData(): Array<Packet | UserHint> {
     return [
         {
