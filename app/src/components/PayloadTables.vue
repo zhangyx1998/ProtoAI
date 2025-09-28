@@ -23,7 +23,7 @@ export default {
       default: false
     },
     timestamp: {
-      type: Object as PropType<BigInt>,
+      type: Number,
       required: true
     }
   },
@@ -51,7 +51,7 @@ export default {
       // Insert rows to be displayed
       for (let i = 0; i < rowCount; i += this.bytesPerRow) {
         hexRows.push(hexValues.slice(i, i + this.bytesPerRow)),
-        charRows.push(charValues.slice(i, i + this.bytesPerRow))
+          charRows.push(charValues.slice(i, i + this.bytesPerRow))
         spacerRows.push(['|'])
       }
 
@@ -63,7 +63,7 @@ export default {
         }
       }
 
-      const rows: { hex: Array<string[]>, char: Array<string[]>, spacer: Array<string[]>} = {
+      const rows: { hex: Array<string[]>, char: Array<string[]>, spacer: Array<string[]> } = {
         hex: hexRows,
         char: charRows,
         spacer: spacerRows
@@ -72,26 +72,22 @@ export default {
     },
   }
 }
-
 </script>
 
-
 <template>
-
-<div :ref="timestamp.toString()" class="hex-tables">
-  <PayloadTable :rows="displayPayload.hex" class="user-select"/>
-  <PayloadTable :rows="displayPayload.spacer"/>
-  <PayloadTable :rows="displayPayload.char"/>
-</div>
-
+  <div :ref="timestamp.toString()" class="hex-tables">
+    <div style="border-right: solid 1px #FFF8; margin: 0 0.5em;">
+      <PayloadTable :rows="displayPayload.hex" class="user-select" />
+    </div>
+    <PayloadTable :rows="displayPayload.char" />
+  </div>
 </template>
 
-
 <style scoped>
-
 .hex-tables {
   display: flex;
   flex-direction: row;
+  position: relative;
+  font-family: 'Cascadia Code', 'Courier New', Courier, monospace;
 }
-
 </style>

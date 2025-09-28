@@ -25,7 +25,7 @@ export default {
       default: false
     },
     timestamp: {
-      type: Object as PropType<BigInt>,
+      type: Number,
       required: true
     }
   },

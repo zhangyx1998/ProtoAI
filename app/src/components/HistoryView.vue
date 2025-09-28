@@ -34,10 +34,7 @@ export default {
 <template>
   <div class="packets-container">
     <div class="chat-bubble" v-for="packet in packets" :class="isUserHint(packet) ? 'right' : 'left'">
-      <div class="data-packet" v-if="!isUserHint(packet)">
-        <DataEntry :packet="packet" :startTime="startTime"/>
-      </div>
-      <div class="hint-packet" v-else>
+      <div :class="isUserHint(packet) ? 'hint-packet' : 'data-packet'">
         <DataEntry :packet="packet" :startTime="startTime"/>
       </div>
     </div>

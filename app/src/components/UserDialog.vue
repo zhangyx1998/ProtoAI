@@ -29,9 +29,6 @@ export default {
 
       return true;
     },
-    elapsedTime() {
-      return this.creationTime - Date.now();
-    }
   },
   methods: {
     submitMessage() {
@@ -41,7 +38,7 @@ export default {
 
       const packet: UserHint = {
         type: "USER-HINT",
-        timestamp: BigInt(this.elapsedTime),
+        timestamp: Date.now() - this.startTime,
         payload: this.inputText
       }
 
@@ -55,18 +52,14 @@ export default {
 
 <template>
   <form @submit.prevent="submitMessage" class="user-dialog-container">
-    <input class="input-box"  v-model="inputText"/>
-    <button
-      type="submit"
-      :class="{ valid: validInput }"
-    >
+    <input class="input-box" v-model="inputText" />
+    <button type="submit" :class="{ valid: validInput }">
       Send
     </button>
   </form>
 </template>
 
 <style scoped>
-
 .user-dialog-container {
   display: flex;
   flex-direction: row;
@@ -76,7 +69,7 @@ export default {
   z-index: 255;
 }
 
-.user-dialog-container:focus, 
+.user-dialog-container:focus,
 .user-dialog-container:focus-within {
   display: flex;
   flex-direction: row;
@@ -108,5 +101,4 @@ button.valid {
   border-color: white;
   border-radius: 3px;
 }
-
 </style>
