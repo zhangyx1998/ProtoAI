@@ -136,7 +136,7 @@ export function mergeWithOriginalData(combinedData, gptDetails) {
 }
 
 // Main processing function (from test.js)
-export async function processInferences(content: string, combinedData = null) {
+export async function processInferences(content: string, combinedData: any[]) {
     try {
         let dataToProcess;
         if (combinedData && Array.isArray(combinedData)) {
@@ -147,13 +147,15 @@ export async function processInferences(content: string, combinedData = null) {
             dataToProcess = readCombinedData();
         }
 
-        console.log('📖 Reading GPT response from file...');
-        const fullFileContent = fs.readFileSync(gptOutputFile, 'utf8');
+        // console.log('📖 Reading GPT response from file...');
+        // const fullFileContent = fs.readFileSync(gptOutputFile, 'utf8');
         
         console.log('🔄 Parsing GPT response...');
         
         // Parse the new GPT response structure (JSON object with summary and details)
-        const gptResponse = JSON.parse(fullFileContent.trim());
+        //const gptResponse = JSON.parse(fullFileContent.trim());
+        const gptResponse = JSON.parse(content);
+        console.log("GPT Response:", gptResponse); // Debug log
         
         // Verify the response has the expected structure
         if (!gptResponse.summary || !gptResponse.details) {

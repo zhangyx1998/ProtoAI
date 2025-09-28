@@ -124,7 +124,7 @@ export async function runGPTInference(combinedData) {
         // Process the inferences using dataHandling.js function
         console.log("🔄 Processing inferences...");
 
-        const result = await processInferences(content);
+        const result = await processInferences(content, combinedData);
 
         return result;
     } catch (error) {

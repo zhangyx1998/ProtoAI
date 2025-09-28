@@ -41,12 +41,13 @@ watch(downStreamPort, (port) => {
     );
 });
 
-function stopCapture() {
+async function stopCapture() {
     const captured = queue.value;
     queue.value = null;
     console.log("Captured packets:", captured);
     store.value.push(...(captured ?? []));
-    runGPTInference(store.value);
+    const chatData = await runGPTInference(store.value.splice(0, 15));
+    store.value = chatData.details;
 }
 </script>
 
