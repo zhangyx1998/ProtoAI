@@ -1,0 +1,6 @@
+.pio
+.cache
+.vscode
+sdkconfig.*
+managed_components/
+compile_commands.json
