@@ -1,0 +1,410 @@
+[
+  {
+    "type": "DATA-DOWN",
+    "timestamp": "10n",
+    "payload": {
+      "type": "ArrayBuffer",
+      "data": [
+        36,
+        77,
+        60,
+        0,
+        1,
+        1
+      ]
+    },
+    "inferred": {
+      "title": "MSP_API_VERSION (request)",
+      "description": "Host requests the MSP/API version from the device",
+      "confidence": 0.98,
+      "fields": [
+        {
+          "name": "Sync ('$')",
+          "description": "Frame start marker",
+          "range": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "Protocol marker ('M')",
+          "description": "Indicates MSP protocol",
+          "range": [
+            8,
+            15
+          ]
+        },
+        {
+          "name": "Direction ('<')",
+          "description": "Host-to-device indicator (request)",
+          "range": [
+            16,
+            23
+          ]
+        },
+        {
+          "name": "Payload length",
+          "description": "Number of payload bytes (0 for this request)",
+          "range": [
+            24,
+            31
+          ]
+        },
+        {
+          "name": "Command ID (0x01)",
+          "description": "MSP_API_VERSION command identifier",
+          "range": [
+            32,
+            39
+          ]
+        },
+        {
+          "name": "Checksum",
+          "description": "XOR of bytes [length, cmd, payload...]",
+          "range": [
+            40,
+            47
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "DATA-UP",
+    "timestamp": "20n",
+    "payload": {
+      "type": "ArrayBuffer",
+      "data": [
+        36,
+        77,
+        62,
+        3,
+        1,
+        0,
+        1,
+        45,
+        46
+      ]
+    },
+    "inferred": {
+      "title": "MSP_API_VERSION (response)",
+      "description": "Device reports MSP and API version",
+      "confidence": 0.98,
+      "fields": [
+        {
+          "name": "Sync ('$')",
+          "description": "Frame start marker",
+          "range": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "Protocol marker ('M')",
+          "description": "Indicates MSP protocol",
+          "range": [
+            8,
+            15
+          ]
+        },
+        {
+          "name": "Direction ('>')",
+          "description": "Device-to-host indicator (response)",
+          "range": [
+            16,
+            23
+          ]
+        },
+        {
+          "name": "Payload length",
+          "description": "Number of payload bytes (3)",
+          "range": [
+            24,
+            31
+          ]
+        },
+        {
+          "name": "Command ID (0x01)",
+          "description": "MSP_API_VERSION command identifier (echoed)",
+          "range": [
+            32,
+            39
+          ]
+        },
+        {
+          "name": "MSP version",
+          "description": "MSP transport version (0x00)",
+          "range": [
+            40,
+            47
+          ]
+        },
+        {
+          "name": "API version (major)",
+          "description": "API major version (0x01)",
+          "range": [
+            48,
+            55
+          ]
+        },
+        {
+          "name": "API version (minor)",
+          "description": "API minor version (0x2D = 45)",
+          "range": [
+            56,
+            63
+          ]
+        },
+        {
+          "name": "Checksum",
+          "description": "XOR of bytes [length, cmd, payload...]",
+          "range": [
+            64,
+            71
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "DATA-DOWN",
+    "timestamp": "30n",
+    "payload": {
+      "type": "ArrayBuffer",
+      "data": [
+        36,
+        77,
+        60,
+        0,
+        4,
+        4
+      ]
+    },
+    "inferred": {
+      "title": "MSP_BOARD_INFO (request)",
+      "description": "Host requests board identifier/info from the device",
+      "confidence": 0.96,
+      "fields": [
+        {
+          "name": "Sync ('$')",
+          "description": "Frame start marker",
+          "range": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "Protocol marker ('M')",
+          "description": "Indicates MSP protocol",
+          "range": [
+            8,
+            15
+          ]
+        },
+        {
+          "name": "Direction ('<')",
+          "description": "Host-to-device indicator (request)",
+          "range": [
+            16,
+            23
+          ]
+        },
+        {
+          "name": "Payload length",
+          "description": "Number of payload bytes (0 for this request)",
+          "range": [
+            24,
+            31
+          ]
+        },
+        {
+          "name": "Command ID (0x04)",
+          "description": "MSP_BOARD_INFO command identifier",
+          "range": [
+            32,
+            39
+          ]
+        },
+        {
+          "name": "Checksum",
+          "description": "XOR of bytes [length, cmd, payload...]",
+          "range": [
+            40,
+            47
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "DATA-UP",
+    "timestamp": "40n",
+    "payload": {
+      "type": "ArrayBuffer",
+      "data": [
+        36,
+        77,
+        62,
+        4,
+        4,
+        66,
+        69,
+        84,
+        65,
+        18
+      ]
+    },
+    "inferred": {
+      "title": "MSP_BOARD_INFO (response)",
+      "description": "Device returns 4-character board identifier",
+      "confidence": 0.97,
+      "fields": [
+        {
+          "name": "Sync ('$')",
+          "description": "Frame start marker",
+          "range": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "Protocol marker ('M')",
+          "description": "Indicates MSP protocol",
+          "range": [
+            8,
+            15
+          ]
+        },
+        {
+          "name": "Direction ('>')",
+          "description": "Device-to-host indicator (response)",
+          "range": [
+            16,
+            23
+          ]
+        },
+        {
+          "name": "Payload length",
+          "description": "Number of payload bytes (4)",
+          "range": [
+            24,
+            31
+          ]
+        },
+        {
+          "name": "Command ID (0x04)",
+          "description": "MSP_BOARD_INFO command identifier (echoed)",
+          "range": [
+            32,
+            39
+          ]
+        },
+        {
+          "name": "Board identifier (ASCII)",
+          "description": "4-byte board ID string ('B','E','T','A')",
+          "range": [
+            40,
+            71
+          ]
+        },
+        {
+          "name": "Checksum",
+          "description": "XOR of bytes [length, cmd, payload...]",
+          "range": [
+            72,
+            79
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "USER-HINT",
+    "timestamp": "50n",
+    "payload": "the flight controller is initiated"
+  },
+  {
+    "type": "DATA-DOWN",
+    "timestamp": "60n",
+    "payload": {
+      "type": "ArrayBuffer",
+      "data": [
+        36,
+        77,
+        60,
+        1,
+        77,
+        2,
+        78
+      ]
+    },
+    "inferred": {
+      "title": "MSP_CMD_0x4D (request)",
+      "description": "Host issues command 0x4D with 1-byte parameter; likely sets motion state (0x02 inferred as 'forward')",
+      "confidence": 0.7,
+      "fields": [
+        {
+          "name": "Sync ('$')",
+          "description": "Frame start marker",
+          "range": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "Protocol marker ('M')",
+          "description": "Indicates MSP protocol",
+          "range": [
+            8,
+            15
+          ]
+        },
+        {
+          "name": "Direction ('<')",
+          "description": "Host-to-device indicator (request)",
+          "range": [
+            16,
+            23
+          ]
+        },
+        {
+          "name": "Payload length",
+          "description": "Number of payload bytes (1)",
+          "range": [
+            24,
+            31
+          ]
+        },
+        {
+          "name": "Command ID (0x4D)",
+          "description": "Command 0x4D (semantics inferred from context)",
+          "range": [
+            32,
+            39
+          ]
+        },
+        {
+          "name": "Parameter",
+          "description": "1-byte parameter (0x02; inferred to mean 'forward' based on subsequent motion hint)",
+          "range": [
+            40,
+            47
+          ]
+        },
+        {
+          "name": "Checksum",
+          "description": "XOR of bytes [length, cmd, payload...]",
+          "range": [
+            48,
+            55
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "USER-HINT",
+    "timestamp": "70n",
+    "payload": "the robot is moving forward right now"
+  }
+]
