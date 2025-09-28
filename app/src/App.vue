@@ -5,11 +5,11 @@ import Menubar from './components/MenuBar.vue';
 import FootBar from './components/FootBar.vue';
 import HistoryView from './components/HistoryView.vue';
 import UserDialog from './components/UserDialog.vue';
-import { convertPayloads } from './helpers/createPlaceholderData';
-import packetJson from '../../data/processed_data.json'
+import packetJson from './summary.json'
 import { store } from './store'
 import { queue } from '@lib/serial';
 import type { Packet, UserHint } from "core";
+import DataOverview from './components/DataOverview.vue';
 
 export default {
   components: {
@@ -18,6 +18,7 @@ export default {
     FootBar,
     HistoryView,
     UserDialog,
+    DataOverview
   },
   computed: {
     startTime() {
@@ -26,7 +27,11 @@ export default {
     }
   },
   data() {
-    return { store };
+    return {
+      store,
+      // summary: packetJson.summary
+      summary: null
+    };
   },
   methods: {
     appendPacket(packet: (Packet | UserHint)) {
@@ -52,7 +57,7 @@ export default {
       </div>
     </template>
     <template #right>
-
+      <DataOverview :summary="summary" />
     </template>
   </HorizontalDivision>
 </template>
