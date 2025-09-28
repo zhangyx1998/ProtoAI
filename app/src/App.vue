@@ -7,12 +7,9 @@ import HistoryView from './components/HistoryView.vue';
 import UserDialog from './components/UserDialog.vue';
 import { convertPayloads } from './helpers/createPlaceholderData';
 import packetJson from '../../data/processed_data.json'
-import { combinedData } from '../../data/data'
+import { store } from './store'
+import { queue } from '@lib/serial';
 import type { Packet, UserHint } from "core";
-
-interface dataInterface {
-  packetData: (Packet | UserHint)[];
-}
 
 export default {
   components: {
@@ -24,18 +21,20 @@ export default {
   },
   computed: {
     startTime() {
-      console.log(`startTime: ${Math.min(...this.packetData.map(e => Number(e.timestamp)))}`)
-      return Math.min(...this.packetData.map(e => Number(e.timestamp)))
+      console.log(`startTime: ${Math.min(...store.value.map(e => Number(e.timestamp)))}`)
+      return Math.min(...store.value.map(e => Number(e.timestamp)))
     }
   },
-  data(): dataInterface {
-    return {
-      packetData: combinedData
-    }
+  data() {
+    return { store };
   },
   methods: {
     appendPacket(packet: (Packet | UserHint)) {
-      this.packetData.push(packet)
+      if (queue.value !== null) {
+        queue.value.push(packet);
+      } else {
+        store.value.push(packet);
+      }
     }
   }
 }
@@ -44,16 +43,16 @@ export default {
 
 <template>
   <Menubar />
-  <FootBar style="z-index: -1"/>
+  <FootBar style="z-index: -1" />
   <HorizontalDivision :min-width-left="320" :min-width-right="320" class="main-layout">
     <template #left>
       <div class="data-panel">
-        <HistoryView style="height: calc(100% - 3em)" :packets="packetData" :startTime="startTime"/>
-        <UserDialog style="height: 3em" :sendPacket="appendPacket" :startTime="startTime"/>
+        <HistoryView style="height: calc(100% - 3em)" :packets="store" :startTime="startTime" />
+        <UserDialog style="height: 3em" :sendPacket="appendPacket" :startTime="startTime" />
       </div>
     </template>
     <template #right>
-      
+
     </template>
   </HorizontalDivision>
 </template>

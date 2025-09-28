@@ -21,6 +21,8 @@
         "app": "cd app && npx vite"
     },
     "dependencies": {
+        "data": "file:../data",
+        "openai": "^5.23.1",
         "serialport": "^13.0.0"
     }
 }

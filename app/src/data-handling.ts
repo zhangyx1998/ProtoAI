@@ -1,9 +1,5 @@
-import fs from 'fs';
-
 // Function to read and parse combinedData from data.ts file
-function readCombinedDataFromFile() {
-    const dataContent = fs.readFileSync('./data.ts', 'utf8');
-    
+function readCombinedData(dataContent: string) {    
     // Extract the combinedData array
     const combinedDataMatch = dataContent.match(/const combinedData[\s\S]*?= \[([\s\S]*?)\];/);
     if (!combinedDataMatch) {
@@ -13,7 +9,7 @@ function readCombinedDataFromFile() {
     // Parse the array content (simplified parsing for this specific format)
     const arrayContent = combinedDataMatch[1];
     const entries = [];
-    
+
     // Split by object boundaries and parse each entry
     const objectMatches = arrayContent.match(/\{[\s\S]*?\}/g) || [];
     
@@ -102,56 +98,8 @@ function applyGPTInferences(combinedData, gptInferences) {
     return result;
 }
 
-// Helper function to convert ArrayBuffer to hex string for display
-function arrayBufferToHexString(buffer) {
-    const uint8Array = new Uint8Array(buffer);
-    return Array.from(uint8Array)
-        .map(byte => byte.toString(16).padStart(2, '0').toUpperCase())
-        .join(' ');
-}
-
-// Function to process GPT response and apply inferences
-function processGptResponse(combinedData, gptResponseText) {
-    try {
-        // Parse the GPT response (already in the correct format)
-        const gptInferences = JSON.parse(gptResponseText);
-        
-        // Apply inferences to the combined data
-        const updatedCombinedData = applyGPTInferences(combinedData, gptInferences);
-        
-        // Log the results for verification
-        console.log('Updated combinedData with inferences:');
-        updatedCombinedData.forEach((entry, index) => {
-            console.log(`\nEntry ${index + 1}:`);
-            console.log(`  Type: ${entry.type}`);
-            console.log(`  Timestamp: ${entry.timestamp}`);
-            
-            if (entry.type === 'USER-HINT') {
-                console.log(`  Context: "${entry.payload}"`);
-            } else {
-                console.log(`  Payload: ${arrayBufferToHexString(entry.payload)}`);
-                if (entry.inferred) {
-                    console.log(`  Inferred: ${entry.inferred.title} (confidence: ${entry.inferred.confidence})`);
-                    console.log(`  Description: ${entry.inferred.description}`);
-                    console.log(`  Fields: ${entry.inferred.fields.length} fields defined`);
-                    
-                    // Show field details
-                    entry.inferred.fields.forEach((field, fieldIndex) => {
-                        console.log(`    Field ${fieldIndex + 1}: ${field.name} [${field.range[0]}-${field.range[1]}] - ${field.description}`);
-                    });
-                }
-            }
-        });
-        
-        return updatedCombinedData;
-    } catch (error) {
-        console.error('Error processing GPT response:', error);
-        return combinedData; // Return original data on error
-    }
-}
-
 // Function to merge GPT details with original combinedData (including USER-HINT entries)
-function mergeWithOriginalData(combinedData, gptDetails) {
+export function mergeWithOriginalData(combinedData, gptDetails) {
     const result = [];
     
     // Since GPT now includes USER-HINT entries in details, we can process them directly
@@ -188,7 +136,7 @@ function mergeWithOriginalData(combinedData, gptDetails) {
 }
 
 // Main processing function (from test.js)
-export async function processInferences(gptOutputFile = './GPT_output.txt', combinedData = null) {
+export async function processInferences(content: string, combinedData = null) {
     try {
         let dataToProcess;
         if (combinedData && Array.isArray(combinedData)) {
@@ -196,9 +144,9 @@ export async function processInferences(gptOutputFile = './GPT_output.txt', comb
             dataToProcess = combinedData;
         } else {
             console.log('📖 Reading combinedData from data.ts...');
-            dataToProcess = readCombinedDataFromFile();
+            dataToProcess = readCombinedData();
         }
-        
+
         console.log('📖 Reading GPT response from file...');
         const fullFileContent = fs.readFileSync(gptOutputFile, 'utf8');
         
@@ -223,27 +171,7 @@ export async function processInferences(gptOutputFile = './GPT_output.txt', comb
             details: detailsWithInferences
         };
         
-        // Save the results to a file
-        const outputFile = './processed_data.json';
-        const jsonOutput = JSON.stringify(finalInference, (key, value) => {
-            // Handle BigInt serialization for JSON
-            if (typeof value === 'bigint') {
-                return value.toString() + 'n';
-            }
-            // Handle ArrayBuffer serialization for JSON
-            if (value instanceof ArrayBuffer) {
-                return {
-                    type: 'ArrayBuffer',
-                    data: Array.from(new Uint8Array(value))
-                };
-            }
-            return value;
-        }, 2);
-        
-        fs.writeFileSync(outputFile, jsonOutput, 'utf8');
-        
         console.log('✅ Processing completed successfully!');
-        console.log(`📁 Results saved to: ${outputFile}`);
         console.log(`📊 Protocol: ${finalInference.summary.title}`);
         console.log(`📖 Overview: ${finalInference.summary.overview.substring(0, 100)}...`);
         console.log(`📊 Processed ${finalInference.details.length} entries total`);
@@ -253,19 +181,9 @@ export async function processInferences(gptOutputFile = './GPT_output.txt', comb
         console.log(`🧠 Applied inferences to ${inferredCount} data packets`);
         
         return finalInference;
-        
     } catch (error) {
         console.error('❌ Processing failed:', error.message);
         console.error(error.stack);
         throw error;
     }
 }
-
-// Export functions for use in other modules
-export {
-    readCombinedDataFromFile,
-    applyGPTInferences,
-    arrayBufferToHexString,
-    processGptResponse,
-    mergeWithOriginalData
-};

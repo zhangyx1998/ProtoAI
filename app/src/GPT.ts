@@ -1,11 +1,5 @@
 import OpenAI from "openai";
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Get current directory for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { processInferences } from "./data-handling.js";
 
 // GPT_infer.js - Pure inference module
 // This module only handles GPT inference processing
@@ -71,8 +65,8 @@ export type InferredPacketType = {
         prompt += `**Entry ${index + 1}:**\n`;
         prompt += `- Type: ${entry.type}\n`;
         prompt += `- Timestamp: ${entry.timestamp}\n`;
-        
-        if (entry.type === 'USER-HINT') {
+
+        if (entry.type === "USER-HINT") {
             prompt += `- Context: "${entry.payload}"\n\n`;
         } else {
             prompt += `- Payload: ${entry.payload}\n\n`;
@@ -90,54 +84,53 @@ export type InferredPacketType = {
     return prompt;
 }
 
-// Function to write prompt to file
-function writePromptToFile(promptContent) {
-    const promptFilePath = path.join(__dirname, 'prompt.txt');
-    fs.writeFileSync(promptFilePath, promptContent, 'utf8');
-    console.log('Generated prompt.txt successfully');
-}
-
 // Main inference function (exported for use in other modules)
 export async function runGPTInference(combinedData) {
     try {
         // Validate input parameter
         if (!combinedData || !Array.isArray(combinedData)) {
-            throw new Error('combinedData parameter is required and must be an array');
+            throw new Error(
+                "combinedData parameter is required and must be an array"
+            );
         }
-        
+
         console.log(`Processing ${combinedData.length} entries...`);
-        
+
         // Generate prompt
-        console.log('Generating prompt...');
+        console.log("Generating prompt...");
         const promptContent = generatePrompt(combinedData);
-        
-        // Write to prompt.txt
-        writePromptToFile(promptContent);
-        
+
         // Initialize OpenAI client
-        const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+        const key = localStorage.getItem("key");
+        if (!key) {
+            alert("OpenAI API key is required");
+            throw new Error("OpenAI API key is required");
+        }
+        localStorage.setItem("key", key);
+        const client = new OpenAI({
+            apiKey: key,
+            dangerouslyAllowBrowser: true,
+        });
 
         // Send prompt to GPT and get response
-        console.log('🤖 Sending prompt to GPT...');
+        console.log("🤖 Sending prompt to GPT...");
         const response = await client.responses.create({
             model: "gpt-5",
-            input: promptContent
+            input: promptContent,
         });
-        
-        // Save GPT response to file
-        const gptOutputFile = path.join(__dirname, 'GPT_output.txt');
-        fs.writeFileSync(gptOutputFile, response.output_text, 'utf8');
-        console.log('💾 GPT response saved to GPT_output.txt');
-        
-        // Process the inferences using dataHandling.js function
-        console.log('🔄 Processing inferences...');
-        const { processInferences } = await import('./dataHandling.js');
-        const result = await processInferences(gptOutputFile);
-        
-        return result;
 
+        const content = response.output_text;
+
+        // Process the inferences using dataHandling.js function
+        console.log("🔄 Processing inferences...");
+
+        const result = await processInferences(content);
+
+        return result;
     } catch (error) {
-        console.error('Error:', error.message);
+        alert(
+            "Error: " + (error instanceof Error ? error.message : String(error))
+        );
         throw error;
     }
 }
