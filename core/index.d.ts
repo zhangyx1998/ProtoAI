@@ -39,6 +39,15 @@ export type BinaryField = {
     readonly range: [number, number];
 };
 
+export type Inference = {
+    summary: {
+        title: string // Name of the protocol
+        overview: string // Short paragrah
+        entries: InferredPacketType[]
+    },
+    details: (Packet | UserHint)[]
+}
+
 declare module "core" {
     /** Path to the resolved native module */
     export const __origin__: string;
