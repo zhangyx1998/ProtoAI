@@ -6,7 +6,7 @@ import FootBar from './components/FootBar.vue';
 import HistoryView from './components/HistoryView.vue';
 import UserDialog from './components/UserDialog.vue';
 import packetJson from './summary.json'
-import { store } from './store'
+import { loading, store } from './store'
 import { queue } from '@lib/serial';
 import type { Packet, UserHint } from "core";
 import DataOverview from './components/DataOverview.vue';
@@ -30,7 +30,8 @@ export default {
     return {
       store,
       // summary: packetJson.summary
-      summary: null
+      summary: null,
+      loading: false
     };
   },
   methods: {
@@ -57,7 +58,7 @@ export default {
       </div>
     </template>
     <template #right>
-      <DataOverview :summary="summary" />
+      <DataOverview :summary="summary" :loading="loading"/>
     </template>
   </HorizontalDivision>
 </template>

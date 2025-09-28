@@ -4,6 +4,10 @@ export default {
   props: {
     summary: {
       default: {}
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -38,7 +42,13 @@ export default {
   </div>
 </div>
 <div v-else class="empty-content">
-  Waiting for AI response...
+  <div v-if="loading">
+    Waiting for AI response...
+  </div>
+  <div v-else>
+    Waiting for packet data...
+  </div>
+  
 </div>
 
 </template>
