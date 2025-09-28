@@ -1,0 +1,186 @@
+{
+  "summary": {
+    "title": "MultiWii Serial Protocol (MSP)",
+    "overview": "A binary request–response protocol with a fixed 3-byte magic header ('$','M', direction), followed by a size byte, a command ID, an optional payload of 'size' bytes, and a 1-byte XOR checksum over size, command, and payload. Direction 0x3C ('<') denotes host-to-device (request), and 0x3E ('>') denotes device-to-host (response).",
+    "entries": [
+      {
+        "title": "MSP Request: API_VERSION (0x01)",
+        "description": "Host requests the MSP API version information from the device. No payload.",
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction flag '<' (0x3C) for host-to-device", "range": [16, 23] },
+          { "name": "size", "description": "Payload size in bytes (must be 0 for this request)", "range": [24, 31] },
+          { "name": "commandId", "description": "Command identifier (0x01)", "range": [32, 39] },
+          { "name": "checksum", "description": "XOR of size and command (since no payload)", "range": [40, 47] }
+        ]
+      },
+      {
+        "title": "MSP Response: API_VERSION (0x01)",
+        "description": "Device reports MSP API version as three bytes: protocol version, API major, API minor.",
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction flag '>' (0x3E) for device-to-host", "range": [16, 23] },
+          { "name": "size", "description": "Payload size in bytes (3 for this response)", "range": [24, 31] },
+          { "name": "commandId", "description": "Command identifier (0x01)", "range": [32, 39] },
+          { "name": "protocolVersion", "description": "MSP protocol version", "range": [40, 47] },
+          { "name": "apiVersionMajor", "description": "API version major", "range": [48, 55] },
+          { "name": "apiVersionMinor", "description": "API version minor", "range": [56, 63] },
+          { "name": "checksum", "description": "XOR of size, command, and payload bytes", "range": [64, 71] }
+        ]
+      },
+      {
+        "title": "MSP Request: FC_VARIANT (0x04)",
+        "description": "Host requests the flight controller firmware variant tag. No payload.",
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction flag '<' (0x3C) for host-to-device", "range": [16, 23] },
+          { "name": "size", "description": "Payload size in bytes (0 for this request)", "range": [24, 31] },
+          { "name": "commandId", "description": "Command identifier (0x04)", "range": [32, 39] },
+          { "name": "checksum", "description": "XOR of size and command", "range": [40, 47] }
+        ]
+      },
+      {
+        "title": "MSP Response: FC_VARIANT (0x04)",
+        "description": "Device reports a 4-character ASCII variant tag identifying firmware.",
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction flag '>' (0x3E) for device-to-host", "range": [16, 23] },
+          { "name": "size", "description": "Payload size in bytes (4 for this response)", "range": [24, 31] },
+          { "name": "commandId", "description": "Command identifier (0x04)", "range": [32, 39] },
+          { "name": "variantChar0", "description": "ASCII variant tag byte 0", "range": [40, 47] },
+          { "name": "variantChar1", "description": "ASCII variant tag byte 1", "range": [48, 55] },
+          { "name": "variantChar2", "description": "ASCII variant tag byte 2", "range": [56, 63] },
+          { "name": "variantChar3", "description": "ASCII variant tag byte 3", "range": [64, 71] },
+          { "name": "checksum", "description": "XOR of size, command, and payload bytes", "range": [72, 79] }
+        ]
+      },
+      {
+        "title": "MSP Request: MOVE (0x4D)",
+        "description": "Host issues a one-byte movement directive parameter to the device.",
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction flag '<' (0x3C) for host-to-device", "range": [16, 23] },
+          { "name": "size", "description": "Payload size in bytes (1 for this request)", "range": [24, 31] },
+          { "name": "commandId", "description": "Command identifier (0x4D)", "range": [32, 39] },
+          { "name": "moveParam", "description": "Movement parameter (e.g., direction/speed code)", "range": [40, 47] },
+          { "name": "checksum", "description": "XOR of size, command, and payload", "range": [48, 55] }
+        ]
+      }
+    ]
+  },
+  "details": [
+    {
+      "type": "DATA-DOWN",
+      "timestamp": 10,
+      "payload": "24 4D 3C 00 01 01",
+      "inferred": {
+        "title": "MSP Request: API_VERSION (0x01)",
+        "description": "Host-to-device MSP frame requesting API version; no payload.",
+        "confidence": 0.95,
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction '<' (0x3C)", "range": [16, 23] },
+          { "name": "size", "description": "0 bytes", "range": [24, 31] },
+          { "name": "commandId", "description": "0x01 (API_VERSION)", "range": [32, 39] },
+          { "name": "checksum", "description": "0x01 (XOR of size and command)", "range": [40, 47] }
+        ]
+      }
+    },
+    {
+      "type": "DATA-UP",
+      "timestamp": 20,
+      "payload": "24 4D 3E 03 01 00 01 2D 2E",
+      "inferred": {
+        "title": "MSP Response: API_VERSION (0x01)",
+        "description": "Device-to-host MSP frame carrying API version: protocol=0x00, major=0x01, minor=0x2D.",
+        "confidence": 0.9,
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction '>' (0x3E)", "range": [16, 23] },
+          { "name": "size", "description": "3 bytes", "range": [24, 31] },
+          { "name": "commandId", "description": "0x01 (API_VERSION)", "range": [32, 39] },
+          { "name": "protocolVersion", "description": "0x00", "range": [40, 47] },
+          { "name": "apiVersionMajor", "description": "0x01", "range": [48, 55] },
+          { "name": "apiVersionMinor", "description": "0x2D (45)", "range": [56, 63] },
+          { "name": "checksum", "description": "0x2E (valid XOR)", "range": [64, 71] }
+        ]
+      }
+    },
+    {
+      "type": "DATA-DOWN",
+      "timestamp": 30,
+      "payload": "24 4D 3C 00 04 04",
+      "inferred": {
+        "title": "MSP Request: FC_VARIANT (0x04)",
+        "description": "Host-to-device MSP frame requesting firmware variant tag; no payload.",
+        "confidence": 0.9,
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction '<' (0x3C)", "range": [16, 23] },
+          { "name": "size", "description": "0 bytes", "range": [24, 31] },
+          { "name": "commandId", "description": "0x04 (FC_VARIANT)", "range": [32, 39] },
+          { "name": "checksum", "description": "0x04 (XOR of size and command)", "range": [40, 47] }
+        ]
+      }
+    },
+    {
+      "type": "DATA-UP",
+      "timestamp": 40,
+      "payload": "24 4D 3E 04 04 42 45 54 41 12",
+      "inferred": {
+        "title": "MSP Response: FC_VARIANT (0x04)",
+        "description": "Device-to-host MSP frame carrying 4-char variant tag: 'B','E','T','A'.",
+        "confidence": 0.85,
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction '>' (0x3E)", "range": [16, 23] },
+          { "name": "size", "description": "4 bytes", "range": [24, 31] },
+          { "name": "commandId", "description": "0x04 (FC_VARIANT)", "range": [32, 39] },
+          { "name": "variantChar0", "description": "0x42 ('B')", "range": [40, 47] },
+          { "name": "variantChar1", "description": "0x45 ('E')", "range": [48, 55] },
+          { "name": "variantChar2", "description": "0x54 ('T')", "range": [56, 63] },
+          { "name": "variantChar3", "description": "0x41 ('A')", "range": [64, 71] },
+          { "name": "checksum", "description": "0x12 (valid XOR)", "range": [72, 79] }
+        ]
+      }
+    },
+    {
+      "type": "USER-HINT",
+      "timestamp": 50,
+      "context": "the flight controller is initiated"
+    },
+    {
+      "type": "DATA-DOWN",
+      "timestamp": 60,
+      "payload": "24 4D 3C 01 4D 02 4E",
+      "inferred": {
+        "title": "MSP Request: MOVE (0x4D)",
+        "description": "Host-to-device MSP frame issuing a one-byte movement parameter (0x02), likely corresponding to a 'forward' directive per subsequent user hint.",
+        "confidence": 0.7,
+        "fields": [
+          { "name": "magic_0", "description": "Magic '$' (0x24)", "range": [0, 7] },
+          { "name": "magic_1", "description": "Magic 'M' (0x4D)", "range": [8, 15] },
+          { "name": "direction", "description": "Direction '<' (0x3C)", "range": [16, 23] },
+          { "name": "size", "description": "1 byte", "range": [24, 31] },
+          { "name": "commandId", "description": "0x4D", "range": [32, 39] },
+          { "name": "moveParam", "description": "0x02 (movement parameter; inferred as 'forward')", "range": [40, 47] },
+          { "name": "checksum", "description": "0x4E (valid XOR)", "range": [48, 55] }
+        ]
+      }
+    },
+    {
+      "type": "USER-HINT",
+      "timestamp": 70,
+      "context": "the robot is moving forward right now"
+    }
+  ]
+}
